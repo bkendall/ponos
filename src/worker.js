@@ -111,7 +111,7 @@ class Worker {
    * @returns {Promise} Promise that is resolved once the task succeeds or
    *   fails.
    */
-  run (): Promise {
+  run (): Promise<void> {
     const log = this.log.child({
       method: 'run',
       queue: this.queue,
