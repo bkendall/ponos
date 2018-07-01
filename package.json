@@ -30,7 +30,7 @@
     "url": "https://github.com/Runnable/ponos.git"
   },
   "options": {
-    "mocha": "--require resources/mocha-bootstrap --recursive --reporter spec --bail --timeout 5000 --compilers js:babel-register"
+    "mocha": "--require resources/mocha-bootstrap --recursive --reporter spec --bail --timeout 5000 --require babel-register"
   },
   "keywords": [
     "worker",
@@ -96,7 +96,6 @@
     "jsdoc": "^3.4.0",
     "mocha": "^5.2.0",
     "sinon": "^6.0.1",
-    "sinon-as-promised": "^4.0.0",
     "standard": "^11.0.1"
   }
 }

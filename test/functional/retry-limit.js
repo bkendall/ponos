@@ -13,8 +13,8 @@ const RabbitMQ = require('../../src/rabbitmq')
 describe('Retry limit task', function () {
   let server
   let rabbitmq
-  const testRecoverStub = sinon.stub().resolves()
-  const taskStub = sinon.stub().rejects(new Error('death to all'))
+  const testRecoverStub = sinon.stub().usingPromise(Promise).resolves()
+  const taskStub = sinon.stub().usingPromise(Promise).rejects(new Error('death to all'))
   before(() => {
     const tasks = {
       'ponos-test:one': {

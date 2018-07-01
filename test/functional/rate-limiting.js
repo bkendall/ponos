@@ -7,7 +7,7 @@ const RabbitMQ = require('../../src/rabbitmq')
 
 const assert = chai.assert
 
-describe('Basic Example', () => {
+describe('Basic Rate Limiting', () => {
   let server
   let rabbitmq
   let count = 0
@@ -60,7 +60,7 @@ describe('Basic Example', () => {
       })
       .delay(2000)
       .then(() => {
-        assert.equal(20, count)
+        assert.equal(19, count)
       })
   })
 })
