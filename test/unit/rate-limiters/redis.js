@@ -201,26 +201,26 @@ describe('redis', () => {
             return Promise.fromCallback(process.nextTick).then(loop)
           }
         })
-        .then(() => {
-          sinon.assert.calledOnce(RateLimiter.prototype.get)
-          sinon.assert.calledOnce(testRedisRateLimiter.limit)
-          sinon.assert.alwaysCalledWith(testRedisRateLimiter.limit, testName, testLimitOpts)
-          sinon.assert.calledOnce(Promise.delay)
-          sinon.assert.alwaysCalledWith(Promise.delay, testLimitOpts.durationMs / 2)
-          stubTime.tick(testLimitOpts.durationMs)
-        })
-        .then(function loop () {
-          if (Promise.delay.callCount !== 2) {
-            return Promise.fromCallback(process.nextTick).then(loop)
-          }
-        })
-        .then(() => {
-          sinon.assert.calledTwice(RateLimiter.prototype.get)
-          sinon.assert.calledTwice(testRedisRateLimiter.limit)
-          sinon.assert.calledTwice(Promise.delay)
-          sinon.assert.alwaysCalledWith(Promise.delay, testLimitOpts.durationMs / 2)
-          stubTime.tick(testLimitOpts.durationMs)
-        })
+          .then(() => {
+            sinon.assert.calledOnce(RateLimiter.prototype.get)
+            sinon.assert.calledOnce(testRedisRateLimiter.limit)
+            sinon.assert.alwaysCalledWith(testRedisRateLimiter.limit, testName, testLimitOpts)
+            sinon.assert.calledOnce(Promise.delay)
+            sinon.assert.alwaysCalledWith(Promise.delay, testLimitOpts.durationMs / 2)
+            stubTime.tick(testLimitOpts.durationMs)
+          })
+          .then(function loop () {
+            if (Promise.delay.callCount !== 2) {
+              return Promise.fromCallback(process.nextTick).then(loop)
+            }
+          })
+          .then(() => {
+            sinon.assert.calledTwice(RateLimiter.prototype.get)
+            sinon.assert.calledTwice(testRedisRateLimiter.limit)
+            sinon.assert.calledTwice(Promise.delay)
+            sinon.assert.alwaysCalledWith(Promise.delay, testLimitOpts.durationMs / 2)
+            stubTime.tick(testLimitOpts.durationMs)
+          })
       ]))
     })
   }) // end limit

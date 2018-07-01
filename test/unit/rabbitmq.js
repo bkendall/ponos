@@ -569,7 +569,7 @@ describe('rabbitmq', () => {
 
     it('should publish with a buffer of the content', () => {
       const payloadWithTid = Object.assign({ tid: 'test-tid' }, mockJob)
-      const jobBuffer = new Buffer(JSON.stringify(payloadWithTid))
+      const jobBuffer = Buffer.from(JSON.stringify(payloadWithTid))
       const jobMeta = {
         appId: testName,
         timestamp: Date.now()
@@ -595,7 +595,7 @@ describe('rabbitmq', () => {
 
     it('should call _incMonitor before publish', () => {
       const payloadWithTid = Object.assign({ tid: 'test-tid' }, mockJob)
-      const jobBuffer = new Buffer(JSON.stringify(payloadWithTid))
+      const jobBuffer = Buffer.from(JSON.stringify(payloadWithTid))
       const jobMeta = {
         appId: testName,
         timestamp: Date.now()
@@ -612,7 +612,7 @@ describe('rabbitmq', () => {
     })
     it('should call buildJobMeta with opts', () => {
       const payloadWithTid = Object.assign({ tid: 'test-tid' }, mockJob)
-      const jobBuffer = new Buffer(JSON.stringify(payloadWithTid))
+      const jobBuffer = Buffer.from(JSON.stringify(payloadWithTid))
       const jobMeta = {
         appId: testName,
         timestamp: Date.now(),
@@ -660,7 +660,7 @@ describe('rabbitmq', () => {
 
     it('should publish with a buffer of the content', () => {
       const payloadWithTid = Object.assign({ tid: 'test-tid' }, mockJob)
-      const jobBuffer = new Buffer(JSON.stringify(payloadWithTid))
+      const jobBuffer = Buffer.from(JSON.stringify(payloadWithTid))
       const jobMeta = {
         appId: testName,
         timestamp: Date.now()
@@ -687,7 +687,7 @@ describe('rabbitmq', () => {
     })
     it('should call _incMonitor before publish', () => {
       const payloadWithTid = Object.assign({ tid: 'test-tid' }, mockJob)
-      const jobBuffer = new Buffer(JSON.stringify(payloadWithTid))
+      const jobBuffer = Buffer.from(JSON.stringify(payloadWithTid))
       const jobMeta = {
         appId: testName,
         timestamp: Date.now()
@@ -705,7 +705,7 @@ describe('rabbitmq', () => {
     })
     it('should call buildJobMeta with opts', () => {
       const payloadWithTid = Object.assign({ tid: 'test-tid' }, mockJob)
-      const jobBuffer = new Buffer(JSON.stringify(payloadWithTid))
+      const jobBuffer = Buffer.from(JSON.stringify(payloadWithTid))
       const jobMeta = {
         appId: testName,
         timestamp: Date.now(),
@@ -1268,10 +1268,10 @@ describe('rabbitmq', () => {
       it('should not subscribe if already subscribed to fanout exchange', () => {
         rabbitmq.subscribed = rabbitmq.subscribed.add('fanout:::fanout-exchange')
         return assert
-        .isFulfilled(rabbitmq._subscribeToExchange(mockFanoutSubscribe))
-        .then(() => {
-          sinon.assert.notCalled(rabbitmq._assertQueue)
-        })
+          .isFulfilled(rabbitmq._subscribeToExchange(mockFanoutSubscribe))
+          .then(() => {
+            sinon.assert.notCalled(rabbitmq._assertQueue)
+          })
       })
 
       it('should assert a queue with provided options', () => {
@@ -1487,7 +1487,7 @@ describe('rabbitmq', () => {
       })
 
       it('should just acknowledge malformed jobs, not handle it', () => {
-        const message = { content: new Buffer('{ nope: 1 }') }
+        const message = { content: Buffer.from('{ nope: 1 }') }
         func(message)
         sinon.assert.calledOnce(rabbitmq.channel.ack)
         sinon.assert.calledWithExactly(rabbitmq.channel.ack, message)

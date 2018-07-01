@@ -201,16 +201,16 @@ class RabbitMQ {
 
       return this._assertExchange(event.name, 'fanout', event)
     })
-    .then(() => {
-      return Promise.each(this.tasks, (task) => {
-        if (typeof task === 'string') {
-          return this._assertQueue(`${this.name}.${task}`)
-        }
+      .then(() => {
+        return Promise.each(this.tasks, (task) => {
+          if (typeof task === 'string') {
+            return this._assertQueue(`${this.name}.${task}`)
+          }
 
-        return this._assertQueue(`${this.name}.${task.name}`, task)
+          return this._assertQueue(`${this.name}.${task.name}`, task)
+        })
       })
-    })
-    .return()
+      .return()
   }
   /**
    * Takes an object representing a message and sends it to a queue.
@@ -692,7 +692,7 @@ class RabbitMQ {
       content.tid = tid || uuid()
     }
     const stringContent = JSON.stringify(content)
-    return new Buffer(stringContent)
+    return Buffer.from(stringContent)
   }
   static buildJobMeta (name, opts) {
     const jobMeta = defaults({

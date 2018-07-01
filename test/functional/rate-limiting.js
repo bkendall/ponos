@@ -54,14 +54,14 @@ describe('Basic Example', () => {
         rabbitmq.publishTask(testQueue, job)
       }
     })
-    .delay(1000)
-    .then(() => {
-      assert.equal(10, count)
-    })
-    .delay(2000)
-    .then(() => {
-      assert.equal(20, count)
-    })
+      .delay(1000)
+      .then(() => {
+        assert.equal(10, count)
+      })
+      .delay(2000)
+      .then(() => {
+        assert.equal(20, count)
+      })
   })
 })
 
