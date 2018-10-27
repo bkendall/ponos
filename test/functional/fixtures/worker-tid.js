@@ -28,12 +28,12 @@ module.exports = (job) => {
       }).then(() => {
         testClsData('try.then')
       })
-      .then(() => {
-        return Promise.resolve()
-          .then(() => {
-            testClsData('try.then.resolve.then')
-          })
-      })
+        .then(() => {
+          return Promise.resolve()
+            .then(() => {
+              testClsData('try.then.resolve.then')
+            })
+        })
     })
     .then(() => {
       testClsData('then')
@@ -63,10 +63,10 @@ module.exports = (job) => {
       return Promise.resolve().then(() => {
         testClsData('then.resolve.then.bind')
       })
-      .bind(this)
-      .then(() => {
-        testClsData('then.resolve.then.bind.then')
-      })
+        .bind(this)
+        .then(() => {
+          testClsData('then.resolve.then.bind.then')
+        })
     })
     .then(() => {
       return Promise.reject(new Error('test')).catch(() => {
@@ -78,85 +78,85 @@ module.exports = (job) => {
         Promise.resolve().then(() => { testClsData('then.all.resolve.then') }),
         Promise.try(() => { testClsData('then.all.try') })
       ])
-      .then(() => {
-        testClsData('then after all')
-      })
+        .then(() => {
+          testClsData('then after all')
+        })
     })
     .then(() => {
       return Promise.props({
         a: Promise.resolve().then(() => { testClsData('then.props.resolve.then') }),
         b: Promise.try(() => { testClsData('then.props.try') })
       })
-      .then(() => {
-        testClsData('then after props')
-      })
+        .then(() => {
+          testClsData('then after props')
+        })
     })
     .then(() => {
       return Promise.any([
         Promise.resolve().then(() => { testClsData('then.any.resolve.then') }),
         Promise.try(() => { testClsData('then.any.try') })
       ])
-      .then(() => {
-        testClsData('then after any')
-      })
+        .then(() => {
+          testClsData('then after any')
+        })
     })
     .then(() => {
       return Promise.some([
         Promise.resolve().then(() => { testClsData('then.some.resolve.then') }),
         Promise.try(() => { testClsData('then.some.try') })
       ], 2)
-      .then(() => {
-        testClsData('then after some')
-      })
+        .then(() => {
+          testClsData('then after some')
+        })
     })
     .then(() => {
       return Promise.map([1, 2], () => {
         testClsData('then.map')
       })
-      .then(() => {
-        testClsData('then after map')
-      })
+        .then(() => {
+          testClsData('then after map')
+        })
     })
     .then(() => {
       return Promise.reduce([1, 2], () => {
         testClsData('then.reduce')
       })
-      .then(() => {
-        testClsData('then after reduce')
-      })
+        .then(() => {
+          testClsData('then after reduce')
+        })
     })
     .then(() => {
       return Promise.filter([1, 2], () => {
         testClsData('then.filter')
       })
-      .then(() => {
-        testClsData('then after filter')
-      })
+        .then(() => {
+          testClsData('then after filter')
+        })
     })
     .then(() => {
       return Promise.each([1, 2], () => {
         testClsData('then.each')
       })
-      .then(() => {
-        testClsData('then after each')
-      })
+        .then(() => {
+          testClsData('then after each')
+        })
     })
     .then(() => {
       return Promise.mapSeries([1, 2], () => {
         testClsData('then.mapSeries')
       })
-      .then(() => {
-        testClsData('then after mapSeries')
-      })
+        .then(() => {
+          testClsData('then after mapSeries')
+        })
     })
     .then(() => {
       return Promise.race([
         Promise.resolve().then(() => { testClsData('then.race.resolve.then') }),
         Promise.try(() => { testClsData('then.race.try') })
       ])
-      .then(() => {
-        testClsData('then after race')
-      })
+        .then(() => {
+          testClsData('then after race')
+        })
     })
     .then(() => {
       return Promise.using(() => {
@@ -166,9 +166,9 @@ module.exports = (job) => {
       }, () => {
         return Promise.try(() => { testClsData('then.using.try') })
       })
-      .then(() => {
-        testClsData('then after using')
-      })
+        .then(() => {
+          testClsData('then after using')
+        })
     })
     .then(() => {
       const testFuncs = {
@@ -232,9 +232,9 @@ module.exports = (job) => {
         testClsData('then.all.fromCallback.cb')
         testFuncs.cb(cb)
       })])
-      .then(() => {
-        testClsData('then.fromCallback.all.then')
-      })
+        .then(() => {
+          testClsData('then.fromCallback.all.then')
+        })
     })
     .then(() => {
       return Promise.fromCallback((cb) => {
@@ -244,9 +244,9 @@ module.exports = (job) => {
           cb()
         })
       })
-      .then(() => {
-        testClsData('then after asCallback')
-      })
+        .then(() => {
+          testClsData('then after asCallback')
+        })
     })
     .then(() => {
       return Promise.delay(1)
@@ -258,9 +258,9 @@ module.exports = (job) => {
       return Promise.delay(100).timeout(10).catch(Promise.TimeoutError, () => {
         testClsData('then.TimeoutError')
       })
-      .then(() => {
-        testClsData('then after timeout')
-      })
+        .then(() => {
+          testClsData('then after timeout')
+        })
     })
     .tap(() => {
       testClsData('tap')

@@ -100,17 +100,17 @@ module.exports = class RedisRateLimiter {
     return Promise.fromCallback((cb) => {
       limiter.get(cb)
     })
-    .then((limitProperties) => {
-      if (!limitProperties.remaining) {
-        const delayTimeMs = Math.floor(durationMs / 2)
-        log.warn({ limitProperties: limitProperties, delayTimeMs: delayTimeMs }, 'over the limit, delaying')
-        return Promise
-          .delay(delayTimeMs)
-          .then(() => {
-            return this.limit(queueName, opts)
-          })
-      }
-      log.trace({ limitProperties: limitProperties }, 'under limit')
-    })
+      .then((limitProperties) => {
+        if (!limitProperties.remaining) {
+          const delayTimeMs = Math.floor(durationMs / 2)
+          log.warn({ limitProperties: limitProperties, delayTimeMs: delayTimeMs }, 'over the limit, delaying')
+          return Promise
+            .delay(delayTimeMs)
+            .then(() => {
+              return this.limit(queueName, opts)
+            })
+        }
+        log.trace({ limitProperties: limitProperties }, 'under limit')
+      })
   }
 }

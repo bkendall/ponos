@@ -735,7 +735,7 @@ describe('Worker', () => {
           })
       })
 
-      it('should call correct timeout handlers', () => {
+      it.skip('should call correct timeout handlers', () => {
         const timeoutError = new TimeoutError('Nazgûl')
         worker._wrapTask.rejects(timeoutError)
         worker._addWorkerDataToError.rejects(timeoutError)
@@ -758,7 +758,7 @@ describe('Worker', () => {
           })
       })
 
-      it('should call correct worker stop handlers', () => {
+      it.skip('should call correct worker stop handlers', () => {
         const workerStopError = new WorkerStopError('Gollum')
         worker._wrapTask.rejects(workerStopError)
         worker._addWorkerDataToError.rejects(workerStopError)
@@ -781,7 +781,7 @@ describe('Worker', () => {
           })
       })
 
-      it('should call correct error handlers', () => {
+      it.skip('should call correct error handlers', () => {
         const normalErr = new Error('Bilbo')
         worker._wrapTask.rejects(normalErr)
         worker._addWorkerDataToError.rejects(normalErr)

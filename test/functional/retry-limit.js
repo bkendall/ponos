@@ -54,12 +54,12 @@ describe('Retry limit task', function () {
           return Promise.delay(3).then(loop)
         }
       })
-      .then(() => {
-        sinon.assert.calledOnce(testRecoverStub)
-        sinon.assert.calledWith(testRecoverStub, job)
-        sinon.assert.callCount(taskStub, 3)
-        sinon.assert.alwaysCalledWithExactly(taskStub, job, sinon.match.object)
-      })
+        .then(() => {
+          sinon.assert.calledOnce(testRecoverStub)
+          sinon.assert.calledWith(testRecoverStub, job)
+          sinon.assert.callCount(taskStub, 3)
+          sinon.assert.alwaysCalledWithExactly(taskStub, job, sinon.match.object)
+        })
     })
   })
 })

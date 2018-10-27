@@ -77,25 +77,25 @@ describe('Basic Failing Task', () => {
         return Promise.delay(5).then(loop)
       }
     })
-    .then(() => {
-      assert.ok(_Worker.prototype.run.calledOnce, '.run called once')
-      /*
+      .then(() => {
+        assert.ok(_Worker.prototype.run.calledOnce, '.run called once')
+        /*
        *  We can get the promise and assure that it was fulfilled!
        *  This should be _fulfilled_ because it threw a WorkerStopError and
        *  acknowledged that the task was completed (even though the task
        *  rejected with an error)
        */
-      const workerRunPromise = _Worker.prototype.run.firstCall.returnValue
-      assert.isFulfilled(workerRunPromise)
-      assert.ok(
-        ErrorCat.report.calledOnce,
-        'worker.report called once'
-      )
-      const err = ErrorCat.report.firstCall.args[0]
-      assert.instanceOf(err, WorkerStopError)
-      assert.match(err, /fail test message is required/)
+        const workerRunPromise = _Worker.prototype.run.firstCall.returnValue
+        assert.isFulfilled(workerRunPromise)
+        assert.ok(
+          ErrorCat.report.calledOnce,
+          'worker.report called once'
+        )
+        const err = ErrorCat.report.firstCall.args[0]
+        assert.instanceOf(err, WorkerStopError)
+        assert.match(err, /fail test message is required/)
 
-      return Promise.resolve()
-    })
+        return Promise.resolve()
+      })
   })
 })

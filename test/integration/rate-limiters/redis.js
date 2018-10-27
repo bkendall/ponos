@@ -42,10 +42,10 @@ describe('rate-limiters/redis integration test', () => {
       }).then(() => { count++ }))
     }
     return Promise.all(tasks)
-    .timeout(50)
-    .catch(Promise.TimeoutError, () => {
-      assert.equal(count, 1)
-    })
+      .timeout(50)
+      .catch(Promise.TimeoutError, () => {
+        assert.equal(count, 1)
+      })
   })
 
   it('should limit to 5 during period', () => {
@@ -58,9 +58,9 @@ describe('rate-limiters/redis integration test', () => {
       }).then(() => { count++ }))
     }
     return Promise.all(tasks)
-    .timeout(800)
-    .catch(Promise.TimeoutError, () => {
-      assert.equal(count, 5)
-    })
+      .timeout(800)
+      .catch(Promise.TimeoutError, () => {
+        assert.equal(count, 5)
+      })
   })
 }) // end rate-limiters/redis integration test

@@ -114,17 +114,17 @@ class Worker {
         joi.assert(this.job, this.jobSchema)
       }
     })
-    .catch((err) => {
-      if (!err.isJoi) {
-        throw err
-      }
+      .catch((err) => {
+        if (!err.isJoi) {
+          throw err
+        }
 
-      throw new WorkerStopError('Invalid job', {
-        queue: this.queue,
-        job: this.job,
-        validationErr: err
+        throw new WorkerStopError('Invalid job', {
+          queue: this.queue,
+          job: this.job,
+          validationErr: err
+        })
       })
-    })
   }
   /**
    * Wraps tasks with CLS and timeout
@@ -222,19 +222,19 @@ class Worker {
     return Promise.try(() => {
       return this.finalRetryFn(this.job)
     })
-    .catch((finalErr) => {
-      this._incMonitor('ponos.finish-retry-fn-error', { result: 'retry-fn-error' })
-      this.log.warn({ err: finalErr }, 'final function errored')
-    })
-    .finally(() => {
-      this._incMonitor('ponos.finish-error', { result: 'retry-error' })
-      throw new WorkerStopError('final retry handler finished', {
-        originalError: err,
-        queue: this.queue,
-        job: this.job,
-        attempt: this.attempt
+      .catch((finalErr) => {
+        this._incMonitor('ponos.finish-retry-fn-error', { result: 'retry-fn-error' })
+        this.log.warn({ err: finalErr }, 'final function errored')
       })
-    })
+      .finally(() => {
+        this._incMonitor('ponos.finish-error', { result: 'retry-error' })
+        throw new WorkerStopError('final retry handler finished', {
+          originalError: err,
+          queue: this.queue,
+          job: this.job,
+          attempt: this.attempt
+        })
+      })
   }
 
   /**

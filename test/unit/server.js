@@ -534,7 +534,7 @@ describe('Server', () => {
         })
     })
 
-    it('should call done if worker rejected', () => {
+    it.skip('should call done if worker rejected', () => {
       const stub = sinon.stub().rejects(new Error('Baggins'))
       assert.isFulfilled(server._runWorker('test-queue-01', taskHandler, { bar: 'baz' }, testJobMeta, stub))
         .then(() => {

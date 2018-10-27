@@ -28,9 +28,9 @@ function workerB (job, ponos) {
       routingKey: '#.new',
       handler: workerC
     })
-    .then(() => {
-      return ponos.consume()
-    })
+      .then(() => {
+        return ponos.consume()
+      })
   })
 }
 

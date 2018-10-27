@@ -321,20 +321,20 @@ class Server {
         }
       )
     })
-    .then(() => {
-      return Promise.map(events.keySeq(), (exchange) => {
-        const worker = events.get(exchange)
-        const options = this._workerOptions[exchange] || {}
-        return this._rabbitmq.subscribeToFanoutExchange(
-          exchange,
-          (job, jobMeta, done) => {
-            this._enqueue(exchange, worker, job, jobMeta, done)
-          },
-          options
-        )
+      .then(() => {
+        return Promise.map(events.keySeq(), (exchange) => {
+          const worker = events.get(exchange)
+          const options = this._workerOptions[exchange] || {}
+          return this._rabbitmq.subscribeToFanoutExchange(
+            exchange,
+            (job, jobMeta, done) => {
+              this._enqueue(exchange, worker, job, jobMeta, done)
+            },
+            options
+          )
+        })
       })
-    })
-    .return()
+      .return()
   }
 
   /**
@@ -368,18 +368,18 @@ class Server {
         return this._redisRateLimiter.limit(name, this._workerOptions[name])
       }
     })
-    .catch((err) => {
+      .catch((err) => {
       // ignore rate limiter errors, just continue
-      this.errorCat.report(err)
-    })
-    .then(() => {
-      const worker = this._workQueues[name].pop()
-      if (worker) {
+        this.errorCat.report(err)
+      })
+      .then(() => {
+        const worker = this._workQueues[name].pop()
+        if (worker) {
         // run worker and start next task in parallel
-        worker()
-        this._workLoop(name)
-      }
-    })
+          worker()
+          this._workLoop(name)
+        }
+      })
   }
 
   /**
